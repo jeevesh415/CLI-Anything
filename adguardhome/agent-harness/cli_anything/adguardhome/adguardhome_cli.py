@@ -556,9 +556,12 @@ def log_show(ctx: click.Context, limit: int, offset: int):
 @click.pass_context
 def log_config(ctx: click.Context, enabled, interval):
     client = make_client(ctx)
-    if enabled is not None:
-        output(log_core.set_log_config(client, enabled=enabled,
-                                  interval=interval or 90), ctx.obj["as_json"])
+    if enabled is not None or interval is not None:
+        current = log_core.get_log_config(client)
+        effective_enabled = enabled if enabled is not None else current.get("enabled", True)
+        effective_interval = interval if interval is not None else current.get("interval", 90)
+        output(log_core.set_log_config(client, enabled=effective_enabled,
+                                  interval=effective_interval), ctx.obj["as_json"])
     else:
         output(log_core.get_log_config(client), ctx.obj["as_json"])
 

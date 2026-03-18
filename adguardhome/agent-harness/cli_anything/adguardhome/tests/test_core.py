@@ -175,11 +175,14 @@ class TestFiltering:
 
     def test_set_enabled(self):
         c = make_client()
-        resp = mock_response({})
-        with patch.object(c.session, "post", return_value=resp) as mock_post:
-            filtering.set_enabled(c, enabled=True)
-            body = mock_post.call_args.kwargs["json"]
-            assert body["enabled"] is True
+        status_resp = mock_response({"enabled": False, "interval": 48})
+        post_resp = mock_response({})
+        with patch.object(c.session, "get", return_value=status_resp):
+            with patch.object(c.session, "post", return_value=post_resp) as mock_post:
+                filtering.set_enabled(c, enabled=True)
+                body = mock_post.call_args.kwargs["json"]
+                assert body["enabled"] is True
+                assert body["interval"] == 48
 
 
 # ---------------------------------------------------------------------------

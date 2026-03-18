@@ -8,7 +8,9 @@ def get_status(client: AdGuardHomeClient) -> dict:
 
 
 def set_enabled(client: AdGuardHomeClient, enabled: bool) -> dict:
-    return client.post("/filtering/config", {"enabled": enabled, "interval": 24})
+    current = get_status(client)
+    interval = current.get("interval", 24)
+    return client.post("/filtering/config", {"enabled": enabled, "interval": interval})
 
 
 def add_filter(client: AdGuardHomeClient, url: str, name: str,
