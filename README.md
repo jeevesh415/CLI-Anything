@@ -706,6 +706,7 @@ cli-anything/
 ├── 📐 drawio/agent-harness/             # Draw.io CLI (138 tests)
 ├── 🧜 mermaid/agent-harness/            # Mermaid Live Editor CLI (10 tests)
 ├── ✨ anygen/agent-harness/             # AnyGen CLI (50 tests)
+├── 🧠 notebooklm/agent-harness/         # NotebookLM CLI (experimental, 21 tests)
 └── 🖼️ comfyui/agent-harness/            # ComfyUI CLI (70 tests)
 ```
 
