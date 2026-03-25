@@ -41,7 +41,7 @@ CLI-Anything: Bridging the Gap Between AI Agents and the World's Software</stron
 
 > Thanks to all invaluable efforts from the community! More updates continuously on the way everyday..
 
-- **2026-03-23** 🤖 Launched **CLI-Hub meta-skill** — agents can now discover and install CLIs autonomously via [`cli-hub-skill/SKILL.md`](cli-hub-skill/SKILL.md). The catalog auto-updates from `registry.json` via GitHub Actions, making the entire marketplace agent-native.
+- **2026-03-23** 🤖 Launched **CLI-Hub meta-skill** — agents can now discover and install CLIs autonomously via [`cli-hub-meta-skill/SKILL.md`](cli-hub-meta-skill/SKILL.md). The catalog auto-updates from `registry.json` via GitHub Actions, making the entire marketplace agent-native.
 
 - **2026-03-22** 🎵 **MuseScore CLI** merged with transpose, export, and instrument management. Community contributions continue expanding domain coverage.
 
@@ -428,7 +428,7 @@ The agent will browse the catalog, install whichever CLI fits the task, and use 
 
 The catalog auto-updates whenever `registry.json` changes — new community CLIs show up automatically.
 
-> **For Claude Code users:** Copy [`cli-hub-skill/SKILL.md`](cli-hub-skill/SKILL.md) into your project or skills directory for the same automatic CLI discovery.
+> **For Claude Code users:** Copy [`cli-hub-meta-skill/SKILL.md`](cli-hub-meta-skill/SKILL.md) into your project or skills directory for the same automatic CLI discovery.
 
 ---
 
