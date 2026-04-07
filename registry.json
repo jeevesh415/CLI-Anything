@@ -118,6 +118,20 @@
       "contributor_url": "https://github.com/zhangxilong-43"
     },
     {
+      "name": "eth2-quickstart",
+      "display_name": "ETH2 QuickStart",
+      "version": "1.0.0",
+      "description": "Hardened Ethereum node deployment and operations via the eth2-quickstart automation scripts",
+      "requires": "local eth2-quickstart checkout with scripts/eth2qs.sh; Linux host required for real install workflows",
+      "homepage": "https://github.com/chimera-defi/eth2-quickstart",
+      "install_cmd": "pip install git+https://github.com/HKUDS/CLI-Anything.git#subdirectory=eth2-quickstart/agent-harness",
+      "entry_point": "cli-anything-eth2-quickstart",
+      "skill_md": "eth2-quickstart/agent-harness/cli_anything/eth2_quickstart/skills/SKILL.md",
+      "category": "devops",
+      "contributor": "chimera-defi",
+      "contributor_url": "https://github.com/chimera-defi"
+    },
+    {
       "name": "gimp",
       "display_name": "GIMP",
       "version": "1.0.0",
