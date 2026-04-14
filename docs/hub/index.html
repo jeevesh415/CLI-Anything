@@ -1070,16 +1070,19 @@
           ? `<div class="card-requires"><strong>Requires</strong> ${esc(c.requires)}</div>`
           : '';
         const skillLink = c.skill_md
-          ? `<a href="${REPO}/blob/main/${c.skill_md}" target="_blank">Skill</a>`
+          ? `<a href="${c.skill_md.startsWith('http') ? c.skill_md : `${REPO}/blob/main/${c.skill_md}`}" target="_blank">Skill</a>`
           : '';
-        const sourceLink = `<a href="${REPO}/tree/main/${c.name}/agent-harness" target="_blank">Source</a>`;
+        const sourceLink = c.source_url
+          ? `<a href="${esc(c.source_url)}" target="_blank">Source</a>`
+          : `<a href="${REPO}/tree/main/${c.name}/agent-harness" target="_blank">Source</a>`;
         const titleHtml = c.homepage
           ? `<a href="${esc(c.homepage)}" target="_blank">${esc(c.display_name)}${EXTERNAL_LINK_SVG}</a>`
           : esc(c.display_name);
-        const isTeam = c.contributor === 'CLI-Anything-Team';
-        const contributorHtml = c.contributor
+        const contributors = c.contributors || (c.contributor ? [{name: c.contributor, url: c.contributor_url}] : []);
+        const isTeam = contributors.length === 1 && contributors[0].name === 'CLI-Anything-Team';
+        const contributorHtml = contributors.length
           ? `<div class="card-contributor">
-              <a href="${esc(c.contributor_url)}" target="_blank">${esc(c.contributor)}</a>${isTeam ? '' : '<span class="community-badge">Community</span>'}
+              ${contributors.map(ct => `<a href="${esc(ct.url)}" target="_blank">${esc(ct.name)}</a>`).join(', ')}${isTeam ? '' : '<span class="community-badge">Community</span>'}
             </div>`
           : '';
         const dateHtml = c.last_modified

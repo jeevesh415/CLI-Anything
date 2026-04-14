@@ -87,11 +87,13 @@
 !/freecad/
 !/iterm2/
 !/slay_the_spire_ii/
+!/eth2-quickstart/
 !/rms/
 !/renderdoc/
 !/cloudcompare/
 !/openscreen/
 !/n8n/
+!/obsidian/
 
 # Step 5: Inside each software dir, ignore everything (including dotfiles)
 /gimp/*
@@ -152,6 +154,8 @@
 /iterm2/.*
 /slay_the_spire_ii/*
 /slay_the_spire_ii/.*
+/eth2-quickstart/*
+/eth2-quickstart/.*
 /rms/*
 /rms/.*
 /renderdoc/*
@@ -168,6 +172,8 @@
 /exa/.*
 /n8n/*
 /n8n/.*
+/obsidian/*
+/obsidian/.*
 
 # Step 6: ...except agent-harness/
 !/gimp/agent-harness/
@@ -201,6 +207,7 @@
 !/iterm2/agent-harness/
 !/slay_the_spire_ii/agent-harness/
 !/slay_the_spire_ii/README.md
+!/eth2-quickstart/agent-harness/
 !/rms/agent-harness/
 !/renderdoc/agent-harness/
 !/cloudcompare/agent-harness/
@@ -211,6 +218,7 @@
 !/wiremock/agent-harness/
 !/exa/agent-harness/
 !/n8n/agent-harness/
+!/obsidian/agent-harness/
 
 # Step 7: Ignore build artifacts within allowed dirs
 **/__pycache__/

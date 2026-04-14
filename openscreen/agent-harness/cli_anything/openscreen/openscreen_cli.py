@@ -26,6 +26,7 @@ _session: Optional[Session] = None
 _json_output = False
 _repl_mode = False
 _auto_save = False
+_dry_run = False
 
 
 # ── Output helpers ────────────────────────────────────────────────────────
@@ -115,8 +116,10 @@ def handle_error(func):
 @click.option("--session", "session_id", default=None, help="Session ID to resume")
 @click.option("--project", "project_path", default=None, help="Open project on start")
 @click.option("-s", "--save", "auto_save", is_flag=True, help="Auto-save after mutations")
+@click.option("--dry-run", "dry_run", is_flag=True, default=False,
+              help="Run command without saving changes to disk")
 @click.pass_context
-def cli(ctx, json_mode, session_id, project_path, auto_save):
+def cli(ctx, json_mode, session_id, project_path, auto_save, dry_run):
     """Openscreen CLI — Screen recording editor.
 
     Edit screen recordings via command line: zoom, speed, trim, crop,
@@ -124,9 +127,10 @@ def cli(ctx, json_mode, session_id, project_path, auto_save):
 
     Run without a subcommand to enter REPL mode.
     """
-    global _session, _json_output, _auto_save
+    global _session, _json_output, _auto_save, _dry_run
     _json_output = json_mode
     _auto_save = auto_save
+    _dry_run = dry_run
     _session = Session(session_id)
 
     if project_path:
@@ -212,7 +216,7 @@ def project_set(key, value):
                 pass
     result = proj_mod.set_setting(_session, key, value)
     output(result)
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
@@ -246,7 +250,7 @@ def zoom_add(start, end, depth, focus_x, focus_y, focus_mode):
         _session, start, end, depth, focus_x, focus_y, focus_mode
     )
     output(result, "Zoom region added")
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
@@ -257,7 +261,7 @@ def zoom_remove(region_id):
     """Remove a zoom region by ID."""
     result = tl_mod.remove_zoom_region(_session, region_id)
     output(result)
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
@@ -286,7 +290,7 @@ def speed_add(start, end, spd):
     """Add a speed region."""
     result = tl_mod.add_speed_region(_session, start, end, spd)
     output(result, "Speed region added")
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
@@ -297,7 +301,7 @@ def speed_remove(region_id):
     """Remove a speed region by ID."""
     result = tl_mod.remove_speed_region(_session, region_id)
     output(result)
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
@@ -325,7 +329,7 @@ def trim_add(start, end):
     """Add a trim region (cuts this section out)."""
     result = tl_mod.add_trim_region(_session, start, end)
     output(result, "Trim region added")
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
@@ -364,7 +368,7 @@ def crop_set(x, y, w, h):
     """Set crop region (normalized 0-1 coordinates)."""
     result = tl_mod.set_crop(_session, x, y, w, h)
     output(result, "Crop updated")
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
@@ -400,7 +404,7 @@ def annotation_add_text(start, end, text, x, y, font_size, color, bg_color):
         _session, start, end, text, x, y, font_size, color, bg_color
     )
     output(result, "Annotation added")
-    if _auto_save and _session.project_path:
+    if _auto_save and not _dry_run and _session.project_path:
         _session.save_project()
 
 
