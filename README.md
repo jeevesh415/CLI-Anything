@@ -168,12 +168,12 @@ That's it. The plugin is now available in your Claude Code session.
 **Step 3: Build a CLI in One Command**
 
 ```bash
-# /cli-anything:cli-anything <software-path-or-repo>
+# /cli-anything <software-path-or-repo>
 # Generate a complete CLI for GIMP (all 7 phases)
-/cli-anything:cli-anything ./gimp
-
-# Note: If your Claude Code is under 2.x, use "/cli-anything" instead.
+/cli-anything ./gimp
 ```
+
+Older Claude Code 2.x releases also accepted `/cli-anything:cli-anything`; auxiliary commands still use the `:subcommand` form (e.g. `/cli-anything:refine`).
 
 This runs the full pipeline:
 1. 🔍 **Analyze** — Scans source code, maps GUI actions to APIs
@@ -342,7 +342,7 @@ Configure Goose to use a CLI provider such as Claude Code, and make sure that CL
 Once Goose is configured, start a session and use the same CLI-Anything commands described above for Claude Code, for example:
 
 ```bash
-/cli-anything:cli-anything ./gimp
+/cli-anything ./gimp
 /cli-anything:refine ./gimp "batch processing and filters"
 ```
 
@@ -365,7 +365,7 @@ This registers the cli-anything plugin in `~/.qoder.json`. Start a new Qodercli 
 **Step 2: Use CLI-Anything from Qodercli**
 
 ```bash
-/cli-anything:cli-anything ./gimp
+/cli-anything ./gimp
 /cli-anything:refine ./gimp "batch processing and filters"
 /cli-anything:validate ./gimp
 ```
@@ -455,7 +455,7 @@ This installs the CLI-Anything plugin to GitHub Copilot CLI. The plugin should n
 **Step 2: Use CLI-Anything from GitHub Copilot CLI**
 
 ```bash
-/cli-anything:cli-anything ./gimp
+/cli-anything ./gimp
 /cli-anything:refine ./gimp "batch processing and filters"
 /cli-anything:validate ./gimp
 ```

@@ -219,6 +219,8 @@
 !/exa/agent-harness/
 !/n8n/agent-harness/
 !/obsidian/agent-harness/
+!/safari/
+!/safari/agent-harness/
 
 # Step 7: Ignore build artifacts within allowed dirs
 **/__pycache__/
