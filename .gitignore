@@ -15,6 +15,7 @@
 !/README.md
 !/CONTRIBUTING.md
 !/SECURITY.md
+!/FIX_NOTES.md
 !/assets/
 !/.pi-extension/
 /.pi-extension/cli-anything/node_modules
@@ -23,27 +24,10 @@
 /.github/*
 !/.github/workflows/
 !/.github/scripts/
+!/.github/CODEOWNERS
+!/.github/labeler.yml
 !/.github/PULL_REQUEST_TEMPLATE.md
 !/.github/ISSUE_TEMPLATE/
-
-# Allow examples directory
-!/examples/
-# Ignore everything inside examples first
-/examples/*
-# Then allow only the subdirs and files we need
-!/examples/README.md
-!/examples/drawio/
-!/examples/slay_the_spire_ii/
-!/examples/videocaptioner/
-# Inside each subdir, ignore everything then allow specific files
-/examples/drawio/*
-!/examples/drawio/drawio_demo.gif
-!/examples/drawio/https_handshake.png
-/examples/slay_the_spire_ii/*
-!/examples/slay_the_spire_ii/example_preview.gif
-/examples/videocaptioner/*
-!/examples/videocaptioner/videocaptioner_before.png
-!/examples/videocaptioner/videocaptioner_after.png
 
 # Step 3: Allow cli-anything-plugin, codex-skill, and skill_generation tests
 !/cli-anything-plugin/
@@ -52,6 +36,9 @@
 !/openclaw-skill/
 !/cli-hub-meta-skill/
 !/cli-hub/
+!/cli-hub-matrix/
+!/skills/
+!/skills/**
 
 # Ignore cli-hub-skill (auto-generated, not tracked)
 /cli-hub-skill/
@@ -65,6 +52,7 @@
 !/zotero/
 !/mubu/
 !/obs-studio/
+!/nslogger/
 !/kdenlive/
 !/shotcut/
 !/anygen/
@@ -92,8 +80,17 @@
 !/renderdoc/
 !/cloudcompare/
 !/openscreen/
+!/QGIS/
 !/n8n/
 !/obsidian/
+!/unrealinsights/
+!/firefly-iii/
+!/nsight-graphics/
+!/lldb/
+!/macrocli/
+!/sbox/
+!/quietshrink/
+!/mailchimp/
 
 # Step 5: Inside each software dir, ignore everything (including dotfiles)
 /gimp/*
@@ -112,6 +109,8 @@
 /mubu/.*
 /obs-studio/*
 /obs-studio/.*
+/nslogger/*
+/nslogger/.*
 /kdenlive/*
 /kdenlive/.*
 /shotcut/*
@@ -164,6 +163,8 @@
 /cloudcompare/.*
 /openscreen/*
 /openscreen/.*
+/QGIS/*
+/QGIS/.*
 /cloudanalyzer/*
 /cloudanalyzer/.*
 /wiremock/*
@@ -174,6 +175,20 @@
 /n8n/.*
 /obsidian/*
 /obsidian/.*
+/unrealinsights/*
+/unrealinsights/.*
+/nsight-graphics/*
+/nsight-graphics/.*
+/lldb/*
+/lldb/.*
+/macrocli/*
+/macrocli/.*
+/sbox/*
+/sbox/.*
+/quietshrink/*
+/quietshrink/.*
+/mailchimp/*
+/mailchimp/.*
 
 # Step 6: ...except agent-harness/
 !/gimp/agent-harness/
@@ -184,6 +199,7 @@
 !/zotero/agent-harness/
 !/mubu/agent-harness/
 !/obs-studio/agent-harness/
+!/nslogger/agent-harness/
 !/kdenlive/agent-harness/
 !/shotcut/agent-harness/
 !/anygen/agent-harness/
@@ -217,10 +233,25 @@
 !/wiremock/
 !/wiremock/agent-harness/
 !/exa/agent-harness/
+!/QGIS/agent-harness/
 !/n8n/agent-harness/
 !/obsidian/agent-harness/
 !/safari/
 !/safari/agent-harness/
+!/unrealinsights/agent-harness/
+!/firefly-iii/agent-harness/
+!/nsight-graphics/agent-harness/
+!/lldb/agent-harness/
+!/macrocli/agent-harness/
+!/sbox/agent-harness/
+!/quietshrink/agent-harness/
+!/mailchimp/agent-harness/
+
+# Exclude non-gedit demo macros from macrocli (local only)
+/macrocli/agent-harness/cli_anything/macrocli/macro_definitions/demo/flameshot*
+/macrocli/agent-harness/cli_anything/macrocli/macro_definitions/demo/kolourpaint*
+/macrocli/agent-harness/cli_anything/macrocli/macro_definitions/demo/snapshots/
+
 
 # Step 7: Ignore build artifacts within allowed dirs
 **/__pycache__/
@@ -246,8 +277,18 @@ assets/gen_typing_gif.py
 
 # Step 10: Allow CLI Hub registry and frontend
 !/registry.json
+!/public_registry.json
+!/matrix_registry.json
 !/docs/
 /docs/*
+!/docs/PREVIEW_PROTOCOL.md
+!/docs/PREVIEW_PROGRESS.md
+!/docs/FREECAD_VIDEO_REFERENCE.md
+!/docs/PREVIEW_MECHANISM_PROGRESS.md
+!/docs/scripts/
+!/docs/scripts/**
+/docs/scripts/__pycache__/
+/docs/scripts/**/*.pyc
 !/docs/hub/
 /docs/hub/registry-dates.json
 !/notebooklm/

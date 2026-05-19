@@ -9,9 +9,9 @@ CLI-Anything：连接 AI Agent 与全世界软件的桥梁</strong><br>
 
 <p align="center">
   <a href="#-快速上手"><img src="https://img.shields.io/badge/快速上手-5_分钟-blue?style=for-the-badge" alt="Quick Start"></a>
-  <a href="#-实测展示"><img src="https://img.shields.io/badge/Demo-11_款软件-green?style=for-the-badge" alt="Demos"></a>
-  <a href="#-测试结果"><img src="https://img.shields.io/badge/测试-1%2C508_通过-brightgreen?style=for-the-badge" alt="Tests"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License"></a>
+  <a href="#-实测展示"><img src="https://img.shields.io/badge/Demo-13_款软件-green?style=for-the-badge" alt="Demos"></a>
+  <a href="#-测试结果"><img src="https://img.shields.io/badge/测试-1%2C741_通过-brightgreen?style=for-the-badge" alt="Tests"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-yellow?style=for-the-badge" alt="License"></a>
 </p>
 
 <p align="center">
@@ -89,12 +89,28 @@ CLI-Anything 以 Claude Code 插件市场的形式托管在 GitHub 上。
 **第三步：一行命令生成 CLI**
 
 ```bash
-# /cli-anything:cli-anything <软件路径或仓库地址>
+# /cli-anything <软件路径或仓库地址>
 # 为 GIMP 生成完整的 CLI（7 个阶段全自动）
-/cli-anything:cli-anything ./gimp
+/cli-anything ./gimp
 
-# 注意：如果你的 Claude Code 版本低于 2.x，请使用 "/cli-anything"。
+# 兼容写法（旧版本 Claude Code 可重试）
+# /cli-anything:cli-anything ./gimp
 ```
+
+Claude Code 不同版本的命令兼容说明：
+- 优先使用 `/cli-anything` 作为主入口。
+- 在已**确认插件已安装并加载**的情况下，若旧版本的 Claude Code 不识别 `/cli-anything`，可尝试兼容写法 `/cli-anything:cli-anything`。
+- 其他辅助命令保持 `:子命令` 形式（例如 `/cli-anything:refine`）。
+
+如果出现 `Unknown skill: cli-anything`，两种写法都引用同一个 skill 名称，切换写法无法解决，请优先排查插件是否已安装/加载：
+1. 重新加载插件命令：`/reload-plugins`
+2. 验证插件是否已加载：`/help cli-anything`（能看到 CLI-Anything 帮助即表示已加载）
+3. 如仍未识别，重新从市场安装：
+   - `/plugin marketplace add HKUDS/CLI-Anything`
+   - `/plugin install cli-anything`
+4. 确认插件可用后，再重试入口命令：
+   - 推荐：`/cli-anything ./gimp`
+   - 仅旧版本：`/cli-anything:cli-anything ./gimp`
 
 完整流水线自动执行：
 1. 🔍 **分析** — 扫描源码，将 GUI 操作映射到 API
@@ -374,7 +390,7 @@ AI Agent 推理能力很强，但操控真实专业软件的能力很弱。现�
 | 💸 "GUI 自动化三天两头崩" | 告别截图、点击和 RPA 的脆弱性，纯命令行操控，结构化接口 |
 | 📊 "Agent 需要结构化数据" | 内置 JSON 输出供 Agent 直接消费，同时保留可读格式方便调试 |
 | 🔧 "定制集成太贵了" | 一个插件就能为任意代码库自动生成 CLI，经过验证的 7 阶段流水线 |
-| ⚡ "原型和生产之间差十万八千里" | 1,508+ 测试用例，全部在真实软件上验证通过，覆盖 11 款主流应用 |
+| ⚡ "原型和生产之间差十万八千里" | 1,774+ 测试用例，全部在真实软件上验证通过，覆盖 13 款主流应用 |
 
 ---
 
@@ -471,7 +487,7 @@ CLI-Anything 适用于任何有代码库的软件 —— 不限领域，不限�
 
 ### 🏭 专业级测试
 
-在 11 款复杂应用上进行了实测，涵盖创意、生产力、通信、图表和 AI 内容生成领域 —— 这些软件此前对 AI Agent 来说几乎不可触及。
+在 13 款复杂应用上进行了实测，涵盖创意、生产力、通信、图表、原生调试、GPU 分析和 AI 内容生成领域 —— 这些软件此前对 AI Agent 来说几乎不可触及。
 
 ### 🎨 覆盖多元领域
 
@@ -581,6 +597,34 @@ CLI-Anything 适用于任何有代码库的软件 —— 不限领域，不限�
 <td align="center">✅ 50</td>
 </tr>
 <tr>
+<td align="center"><strong>🐞 <a href="lldb/agent-harness/">LLDB</a></strong></td>
+<td>原生调试</td>
+<td><code>cli-anything-lldb</code></td>
+<td>LLDB Python API</td>
+<td align="center">✅ 27</td>
+</tr>
+<tr>
+<td align="center"><strong>🟩 <a href="nsight-graphics/agent-harness/">Nsight Graphics CLI</a></strong></td>
+<td>GPU 调试与分析</td>
+<td><code>cli-anything-nsight-graphics</code></td>
+<td>官方 ngfx / ngfx-capture 编排 + GPU Trace 摘要 + replay 分析</td>
+<td align="center">✅ 51</td>
+</tr>
+<tr>
+<td align="center"><strong>📈 <a href="unrealinsights/agent-harness/">Unreal Insights</a></strong></td>
+<td>性能分析</td>
+<td><code>cli-anything-unrealinsights</code></td>
+<td>后台 trace 会话 + 匹配版 UnrealInsights 构建 + 无头导出</td>
+<td align="center">✅ 50</td>
+</tr>
+<tr>
+<td align="center"><strong>📦 <a href="sbox/agent-harness/">s&amp;box</a></strong></td>
+<td>游戏开发</td>
+<td><code>cli-anything-sbox</code></td>
+<td>Source 2 游戏引擎 - 直接读写 .scene/.prefab/.vmat/.vsnd JSON</td>
+<td align="center">✅ 244</td>
+</tr>
+<tr>
 <td align="center"><strong>🎨 Sketch</strong></td>
 <td>UI 设计</td>
 <td><code>sketch-cli</code></td>
@@ -589,11 +633,11 @@ CLI-Anything 适用于任何有代码库的软件 —— 不限领域，不限�
 </tr>
 <tr>
 <td align="center" colspan="4"><strong>合计</strong></td>
-<td align="center"><strong>✅ 1,527</strong></td>
+<td align="center"><strong>✅ 1,774</strong></td>
 </tr>
 </table>
 
-> 全部 1,628 项测试 **100% 通过** —— 1,151 项单元测试 + 458 项端到端测试 + 19 项 Node.js 测试。
+> 全部 1,774 项测试 **100% 通过** - 1,268 项单元测试 + 487 项端到端测试 + 19 项 Node.js 测试。
 
 ---
 
@@ -622,9 +666,12 @@ openscreen    101 passed  ✅   (78 unit + 23 e2e)
 zoom           22 passed  ✅   (22 unit + 0 e2e)
 drawio        138 passed  ✅   (116 unit + 22 e2e)
 anygen         50 passed  ✅   (40 unit + 10 e2e)
+lldb           27 passed  ✅   (23 unit + 4 e2e)
+nsight-graphics 51 passed ✅   (46 unit/CLI + 5 local e2e)
+unrealinsights 50 passed  ✅   (49 unit + 1 e2e, 9 backend-gated e2e skipped)
 sketch         19 passed  ✅   (19 jest, Node.js)
 ──────────────────────────────────────────────────────────────────────────────
-TOTAL        1,628 passed  ✅   100% pass rate
+TOTAL        1,774 passed  ✅   100% pass rate
 ```
 
 ---
@@ -691,6 +738,10 @@ cli-anything/
 ├── 📞 zoom/agent-harness/               # Zoom CLI（22 项测试）
 ├── 📐 drawio/agent-harness/             # Draw.io CLI（138 项测试）
 ├── ✨ anygen/agent-harness/             # AnyGen CLI（50 项测试）
+├── 🟩 nsight-graphics/agent-harness/    # Nsight Graphics CLI（51 项测试）
+├── 🐞 lldb/agent-harness/               # LLDB CLI（27 项测试）
+├── 📈 unrealinsights/agent-harness/     # Unreal Insights CLI（50 项测试）
+├── 📦 sbox/agent-harness/               # s&box CLI（244 项测试: 157 单元 + 17 orchestrator + 50 e2e + 20 exit-code）
 └── 🎨 sketch/agent-harness/             # Sketch CLI（19 项测试，Node.js）
 ```
 
@@ -793,7 +844,7 @@ HARNESS.md 是我们通过自动化 CLI 生成，使任意软件具备 Agent 可
 
 它记录了在自动化生成过程中经验证并沉淀出的模式与方法论。
 
-这本手册提炼了成功构建全部 11 套生产级 CLI 的关键经验。
+这本手册提炼了成功构建全部 13 套生产级 CLI 的关键经验。
 
 ### 核心经验
 
@@ -919,7 +970,7 @@ CLI_ANYTHING_FORCE_INSTALLED=1 python3 -m pytest cli_anything/<软件名>/tests/
 
 ## 📄 License
 
-MIT License — 可自由使用、修改和分发。
+Apache License 2.0 — 可自由使用、修改和分发。
 
 ---
 
@@ -927,7 +978,7 @@ MIT License — 可自由使用、修改和分发。
 
 **CLI-Anything** — *一行命令，让任何软件成为 Agent 的原生工具。*
 
-<sub>为 AI Agent 时代而生 | 11 款专业软件实测 | 1,508 项测试全部通过</sub>
+<sub>为 AI Agent 时代而生 | 13 款专业软件实测 | 1,774 项测试全部通过</sub>
 
 <br>
 
